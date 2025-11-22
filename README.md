@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+                                      Dynamic Portfolio Dashboard
 
-## Getting Started
+A dynamic portfolio dashboard built with Next.js, React, TailwindCSS, and Express.js, allowing users to visualize their stock investments in real time. The app reads data from an Excel file, fetches stock information from Yahoo Finance, calculates gains/losses, portfolio percentages, and displays sector-wise summaries.
 
-First, run the development server:
+*Features :
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+a) Reads portfolio data from an Excel file.
+b) Fetches current stock prices and financial metrics using Yahoo Finance API.
+c) Groups stocks by sector and calculates:
+d)Total investment per sector
+e)Present value
+f)Gain/Loss
+g)Portfolio percentage per stock
+h)Responsive and interactive dashboard with React and TailwindCSS.
+i)Auto-refreshes data every 15 seconds.
+j)Handles invalid symbols and errors gracefully.
+k)Uses ESLint for code quality and consistency.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*Tech Stack
+  *Frontend
+        Technology	Version
+        Next.js	16.0.1
+        React / React-DOM	19.2.0
+        TailwindCSS	4
+  *Backend
+        Technology	Version
+        Node.js	20
+        Express.js	5.1.0
+        convert-excel-to-json	1.7.0
+        Yahoo Finance 2	3.10.1
+        CORS	2.8.5
+    dynamic-portfolio/
+│
+├─ app/                  # Next.js frontend
+│  ├─ components/
+│  │  └─ PortfolioTable.tsx
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  └─ page.tsx
+│
+├─ public/               # Static assets
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ next.svg
+│  └─ window.svg
+│
+├─ server/               # Backend API
+│  └─ portfolio.js
+│
+├─ node_modules/
+├─ package.json
+├─ package-lock.json
+├─ next.config.ts
+├─ tsconfig.json
+├─ postcss.config.mjs
+├─ eslint.config.mjs
+└─ README.md
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*Installation
+a)git clone https://github.com/yourusername/dynamic-portfolio.git
+cd dynamic-portfolio
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*Install dependencies:
+npm install
 
-## Learn More
+*Ensure the Excel file exists and update the path in server/portfolio.js:
+const filePath = "/home/naina/Downloads/sample.xlsx";
 
-To learn more about Next.js, take a look at the following resources:
+*Backend
+Start the Express server:
+node server/portfolio.js
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*Endpoint:
+GET /portfolio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*Returns JSON:
+results → array of stock objects
+sectorSummary → totals per sector
 
-## Deploy on Vercel
+*Frontend
+Start Next.js development server:
+[root@vbox dynamic-portfolio]$ npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*Open in browser: http://localhost:3000
+a)Dashboard displays:
+b)Sector-wise stock table
+c)Investment, CMP, Gain/Loss, Portfolio %
+d)P/E Ratio and Latest EPS
+e)Auto-refresh every 15 seconds
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*ESLint (Code Quality)
+The project uses ESLint to maintain clean and consistent code.
+npm run lint
+
+*Data Flow Diagram
++----------------+       +-----------------+       +------------------+
+|                |       |                 |       |                  |
+|   Excel File   |  -->  |   Express.js    |  -->  |   Next.js +      |
+| (sample.xlsx)  |       |   Backend API   |       |   React Frontend |
+|                |       |   /portfolio    |       |   Dashboard      |
++----------------+       +-----------------+       +------------------+
+        |                        |                        |
+        | Read & parse            | Fetch Yahoo Finance    |
+        | (convert-excel-to-json) | & calculate metrics   |
+        |                        |                        |
+        +------------------------+------------------------+
+                                 |
+                                 v
+                        JSON response with:
+                  - Stock data (CMP, P/E, gain/loss)
+                  - Sector summaries
+*Configuration
+a)Excel File Path: Update filePath in server/portfolio.js.
+b)Refresh Interval: In PortfolioTable.tsx (default 15000 ms).
+
+*Screenshot
+/home/naina/dynamic-portfolio/screenshot

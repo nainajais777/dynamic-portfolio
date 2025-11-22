@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "server/portfolio11.js"  ],
   "exclude": ["node_modules"]
 }
